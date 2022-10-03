@@ -59,6 +59,3 @@ RUN touch /var/lib/rport/client-auth.json && chown rport /var/lib/rport/client-a
 RUN touch /var/lib/rport/api-auth.json && chown rport /var/lib/rport/api-auth.json
 RUN touch /var/lib/rport/privkey.pem && chown rport /var/lib/rport/privkey.pem
 RUN touch /var/lib/rport/fullchain.pem && chown rport /var/lib/rport/fullchain.pem
-
-HEALTHCHECK --interval=30s --timeout=5s\
-    CMD curl --fail http://localhost:3000 || exit 1
