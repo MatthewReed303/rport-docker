@@ -55,5 +55,10 @@ EXPOSE 4822
 
 CMD ["/usr/bin/supervisord"]
 
+RUN touch /var/lib/rport/client-auth.json && chown rport /var/lib/rport/client-auth.json
+RUN touch /var/lib/rport/api-auth.json && chown rport /var/lib/rport/api-auth.json
+RUN touch /var/lib/rport/privkey.pem && chown rport /var/lib/rport/privkey.pem
+RUN touch /var/lib/rport/fullchain.pem && chown rport /var/lib/rport/fullchain.pem
+
 HEALTHCHECK --interval=30s --timeout=5s\
-    CMD wget --no-check-certificate --spider -S https://localhost:3000 2>&1 > /dev/null | grep -q "200 OK$"
+    CMD curl --fail http://localhost:3000 || exit 1
