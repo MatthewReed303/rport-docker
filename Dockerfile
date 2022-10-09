@@ -44,6 +44,11 @@ COPY rportd-client-connect.conf /etc/fail2ban/filter.d/
 
 RUN service fail2ban restart
 
+RUN touch /var/lib/rport/client-auth.json && chown rport /var/lib/rport/client-auth.json
+RUN touch /var/lib/rport/api-auth.json && chown rport /var/lib/rport/api-auth.json
+RUN touch /var/lib/rport/privkey.pem && chown rport /var/lib/rport/privkey.pem
+RUN touch /var/lib/rport/fullchain.pem && chown rport /var/lib/rport/fullchain.pem
+
 USER rport
 
 VOLUME [ "/var/lib/rport/" ]
@@ -55,7 +60,4 @@ EXPOSE 4822
 
 CMD ["/usr/bin/supervisord"]
 
-RUN touch /var/lib/rport/client-auth.json && chown rport /var/lib/rport/client-auth.json
-RUN touch /var/lib/rport/api-auth.json && chown rport /var/lib/rport/api-auth.json
-RUN touch /var/lib/rport/privkey.pem && chown rport /var/lib/rport/privkey.pem
-RUN touch /var/lib/rport/fullchain.pem && chown rport /var/lib/rport/fullchain.pem
+
