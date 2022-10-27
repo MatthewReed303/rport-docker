@@ -11,7 +11,7 @@ version: '3.9'
 services:
   rport-server:
     container_name: rport
-    image: iotech17/rport:latest
+    image: mrea303/rport-docker:latest
     cap_add:
      - sys_nice
     ulimits:
