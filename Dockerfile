@@ -1,7 +1,8 @@
 FROM alpine:3.15 as downloader
 
-ARG rport_version=0.8.7
-ARG frontend_build=0.8.0-build-1092
+ARG rport_version=0.9.0
+ARG frontend_build=0.9.0-build-1128
+#ARG rportplus=0.1.0
 ARG NOVNC_VERSION=1.3.0
 
 RUN apk add unzip
@@ -12,6 +13,8 @@ RUN wget -q https://github.com/cloudradar-monitoring/rport/releases/download/${r
      && tar xzf rportd.tar.gz rportd
 RUN wget -q https://downloads.rport.io/frontend/stable/rport-frontend-stable-${frontend_build}.zip -O frontend.zip \
     && unzip frontend.zip -d ./frontend
+RUN mkdir rportplus && wget -q https://github.com/cloudradar-monitoring/rport/releases/download/0.9.0/rport-plus_0.1.0@0.9.0_Linux_x86_64.tar.gz -O rportplus.tar.gz \
+    && tar xzf rportplus.tar.gz -c /rportplus
 RUN wget https://github.com/novnc/noVNC/archive/refs/tags/v${NOVNC_VERSION}.zip -O novnc.zip \
     && unzip novnc.zip && mv noVNC-${NOVNC_VERSION} ./novnc
 
